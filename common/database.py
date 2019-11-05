@@ -1,4 +1,5 @@
 from typing import Dict
+
 import pymongo as pymongo
 
 
@@ -18,3 +19,10 @@ class Database:
     def find_one(collection: str, query: Dict) -> Dict:
         return Database.DATABASE[collection].find_one(query)
 
+    @staticmethod
+    def update(collection: str, query: Dict, data: Dict) -> None:
+        return Database.DATABASE[collection].update(query, data, upsert=True)
+
+    @staticmethod
+    def remove(collection: str, query: Dict) -> None:
+        return Database.DATABASE[collection].remove(query)
