@@ -26,3 +26,4 @@ class Database:
     @staticmethod
     def remove(collection: str, query: Dict) -> None:
         return Database.DATABASE[collection].remove(query)
+

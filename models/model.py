@@ -30,6 +30,7 @@ class Model(metaclass=ABCMeta):
     @classmethod
     def all(cls: Type[T]) -> List[T]:
         elements_from_db = Database.find(cls.collection, {})
+
         return [cls(**elem) for elem in elements_from_db]
 
     @classmethod
