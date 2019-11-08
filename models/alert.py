@@ -1,4 +1,5 @@
 import uuid
+from dataclasses import dataclass, field
 from typing import Dict
 
 from common.database import Database
@@ -6,15 +7,15 @@ from models.item import Item
 from models.model import Model
 
 
+@dataclass(eq=False)
 class Alert(Model):
-    collection = "alerts"
+    collection: str = field(init=False, default="alerts")
+    item_id: str
+    price_limit: float
+    _id: str = field(default_factory=lambda: uuid.uuid4().hex)
 
-    def __init__(self, item_id: str, price_limit: float, _id: str = None):
-        super().__init__()
-        self.item_id = item_id
-        self.item = Item.get_by_id(item_id)
-        self.price_limit = price_limit
-        self._id = _id or uuid.uuid4().hex
+    def __post_init__(self):
+        self.item = Item.get_by_id(self.item_id)
 
     def json(self) -> Dict:
         return {
