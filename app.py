@@ -1,7 +1,6 @@
 from flask import Flask
 
 from views.alerts import alert_blueprint
-from views.items import item_blueprint
 
 # alert = Alert("35dd94187e8c4d3cb4477c58756224b5", 2000)
 # alert.save_to_mongo()
@@ -18,7 +17,6 @@ from views.items import item_blueprint
 
 app = Flask(__name__)
 
-app.register_blueprint(item_blueprint, url_prefix='/items')
 app.register_blueprint(alert_blueprint, url_prefix='/alerts')
 
 if __name__ == '__main__':
